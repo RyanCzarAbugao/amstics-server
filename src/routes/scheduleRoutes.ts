@@ -3,9 +3,9 @@ import scheduleController from '../controllers/routineController';
 
 const router = Router();
 
-router.get('/', scheduleController.getSchedules);
-router.post('/', scheduleController.setSchedules);
-router.put('/:id', scheduleController.updateSchedules);
-router.delete('/:id', scheduleController.deleteSchedules);
+router.get('/', scheduleController.getRoutines);
+router.post('/', scheduleController.setRoutines);
+router.put('/:id', scheduleController.updateRoutines);
+router.delete('/:id', scheduleController.deleteRoutines);
 
 export default router;
