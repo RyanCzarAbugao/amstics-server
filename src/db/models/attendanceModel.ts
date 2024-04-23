@@ -1,8 +1,18 @@
-import mongoose, { Model, Document } from "mongoose";
+import mongoose from "mongoose";
 
-const { Schema, model } = mongoose;
+const { Schema} = mongoose;
 
-interface AttendanceDocument extends Document {
+interface IAttendance {
+  enroll_no: number;
+  class_date: Date;
+  status: string;
+}
+
+interface attendanceModelInterface extends mongoose.Model<AttendanceDoc> {
+  build(attr: IAttendance): any
+}
+
+interface AttendanceDoc extends mongoose.Document {
   enroll_no: number;
   class_date: Date;
   status: string;
@@ -10,10 +20,14 @@ interface AttendanceDocument extends Document {
 
 const attendanceSchema = new Schema({
   enroll_no: { type: Number, required: true },
-  class_date: { type: String, required: true },
-  status: { type: Date, required: true }
+  class_date: { type: Date, required: true },
+  status: { type: String, required: true }
 });
 
-const Attendance: Model<AttendanceDocument> = model<AttendanceDocument>('Attendance', attendanceSchema);
+attendanceSchema.statics.build = (attr: IAttendance) => {
+  return new Attendance(attr)
+}
 
-export default Attendance;
+const Attendance = mongoose.model<AttendanceDoc, attendanceModelInterface>('Attendance', attendanceSchema);
+
+export { Attendance };

@@ -1,5 +1,5 @@
 import expressAsyncHandler from "express-async-handler";
-import Student from '../db/models/studentModel';
+import { Student } from '../db/models/studentModel';
 
 class StudentController {
   /**

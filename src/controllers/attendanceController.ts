@@ -1,5 +1,6 @@
+import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
-import Attendance from '../db/models/attendanceModel';
+import { Attendance } from '../db/models/attendanceModel';
 
 class AttendanceController {
   /**
@@ -11,7 +12,7 @@ class AttendanceController {
   *     summary: 
   *     description: 
   */
-  public getAttendances = expressAsyncHandler(async (req, res) => {
+  public getAttendances = expressAsyncHandler(async (req: Request, res: Response) => {
     const attendance = await Attendance.find();
     res.status(200).json(attendance);
   });
@@ -26,35 +27,10 @@ class AttendanceController {
   *     description: 
   */
   public setAttendances = expressAsyncHandler(async (req, res) => {
-    res.status(200).json({ message: "set users" });
-  });
-
-  /**
-  * @swagger
-  * /attendance:
-  *   put:
-  *     tags: 
-  *       - Attendance
-  *     summary: 
-  *     description: 
-  */
-  public updateAttendances = expressAsyncHandler(async (req, res) => {
-    console.log(req.body);
-
-    res.status(200).json({ message: `update users ${req.params.id}` });
-  });
-
-  /**
-  * @swagger
-  * /attendance:
-  *   delete:
-  *     tags: 
-  *       - Attendance
-  *     summary: 
-  *     description:
-  */
-  public deleteAttendances = expressAsyncHandler(async (req, res) => {
-    res.status(200).json({ message: `delete users ${req.params.id}` });
+    const { enroll_no, class_date, status } = req.body;
+    const attendance = Attendance.build({enroll_no, class_date, status});
+    await attendance.save();
+    res.status(201).send(attendance);
   });
 }
 

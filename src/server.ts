@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import colors from 'colors';
 import 'dotenv/config';
 import connectDB from './db/dbConfig';
+import cors from 'cors';
 import errorHandler from './middleware/errorMiddleware';
 import subjectRoutes from './routes/subjectRoutes';
 import studentRoutes from './routes/studentRoutes';
@@ -17,6 +18,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const host = process.env.HOST || 'http://localhost';
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
