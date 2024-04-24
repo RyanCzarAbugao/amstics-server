@@ -15,24 +15,17 @@ import attendanceRoutes from './routes/attendanceRoutes';
 connectDB();
 
 const app = express();
-const port = process.env.PORT || 5000;
-
-app.use(cors());
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://iridescent-truffle-570beb.netlify.app/"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
+app.use(function(req, res, next) {
+  const allowedOrigins = ['http://localhost:5000', 'https://amstics-server.onrender.com', 'http://amstics-server.onrender.com'];
+  const origin = req.headers.origin;
+  res.setHeader('Access-Control-Allow-Origin', origin!);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-credentials", 'true');
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
   next();
 });
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
