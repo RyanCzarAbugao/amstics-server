@@ -15,31 +15,27 @@ import attendanceRoutes from './routes/attendanceRoutes';
 connectDB();
 
 const app = express();
-const corsOptions = {
-  origin: [
-    'http://localhost:5000', 
-    'https://amstics-server.onrender.com',
-    'https://amstics-server.onrender.com',
-    'http://amstics-server.onrender.com:5000',
-    'http://amstics-server.onrender.com:10000',
-    'https://iridescent-truffle-570beb.netlify.app',
-    'http://iridescent-truffle-570beb.netlify.app'
-  ],
-  credentials: true, 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE'] 
-};
 
-app.options('*', cors(corsOptions)); 
 
 app.use((req, res, next) => {
+  // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', 'https://iridescent-truffle-570beb.netlify.app');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, UPDATE');
+
+  // Pass to next layer of middleware
   next();
 });
 
-app.use(cors(corsOptions));
+//app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
