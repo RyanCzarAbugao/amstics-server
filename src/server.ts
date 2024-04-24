@@ -16,13 +16,12 @@ connectDB();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const host = process.env.HOST || 'http://localhost';
 
 app.use(cors());
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "*"
+    "https://iridescent-truffle-570beb.netlify.app/"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
