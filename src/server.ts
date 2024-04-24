@@ -17,7 +17,7 @@ connectDB();
 const app = express();
 const corsOptions = {
   origin: [
-    'http://localhost:5000', // Allow requests from localhost during development
+    'http://localhost:5000', 
     'https://amstics-server.onrender.com',
     'https://amstics-server.onrender.com',
     'http://amstics-server.onrender.com:5000',
@@ -25,11 +25,11 @@ const corsOptions = {
     'https://iridescent-truffle-570beb.netlify.app',
     'http://iridescent-truffle-570beb.netlify.app'
   ],
-  credentials: true, // Allow sending cookies and authentication headers
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE'] // Allow specified HTTP methods
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE'] 
 };
 
-app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
+app.options('*', cors(corsOptions)); 
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://iridescent-truffle-570beb.netlify.app');
