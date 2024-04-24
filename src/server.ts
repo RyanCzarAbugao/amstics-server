@@ -19,7 +19,9 @@ const corsOptions = {
   origin: [
     'http://localhost:5000', // Allow requests from localhost during development
     'https://amstics-server.onrender.com',
-    'http://amstics-server.onrender.com',
+    'https://amstics-server.onrender.com',
+    'http://amstics-server.onrender.com:5000',
+    'http://amstics-server.onrender.com:10000',
     'https://iridescent-truffle-570beb.netlify.app',
     'http://iridescent-truffle-570beb.netlify.app'
   ],
