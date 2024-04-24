@@ -18,11 +18,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 const host = process.env.HOST || 'http://localhost';
 
-app.use(cors());
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://iridescent-truffle-570beb.netlify.app",
+    "https://iridescent-truffle-570beb.netlify.app"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -32,7 +31,11 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
   );
+  next();
 });
+
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
@@ -58,6 +61,8 @@ app.use('/api/attendances', attendanceRoutes);
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(colors.cyan.underline(`Server running on: ${host}:${port}`));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
