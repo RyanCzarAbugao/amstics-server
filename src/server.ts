@@ -22,7 +22,7 @@ app.use(cors());
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "*, https://iridescent-truffle-570beb.netlify.app"
+    "*"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
