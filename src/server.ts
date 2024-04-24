@@ -16,7 +16,13 @@ connectDB();
 
 const app = express();
 app.use(function(req, res, next) {
-  const allowedOrigins = ['http://localhost:5000', 'https://amstics-server.onrender.com', 'http://amstics-server.onrender.com'];
+  const allowedOrigins = [
+    'http://localhost:5000', 
+    'https://amstics-server.onrender.com', 
+    'http://amstics-server.onrender.com',
+    'https://iridescent-truffle-570beb.netlify.app',
+    'http://iridescent-truffle-570beb.netlify.app'
+  ];
   const origin = req.headers.origin;
   res.setHeader('Access-Control-Allow-Origin', origin!);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
