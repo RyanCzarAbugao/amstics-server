@@ -16,6 +16,20 @@ connectDB();
 
 const app = express();
 
+const corsOptions = {
+  origin: [
+    'http://localhost:5000', // Allow requests from localhost during development
+    'https://amstics-server.onrender.com',
+    'http://amstics-server.onrender.com',
+    'https://iridescent-truffle-570beb.netlify.app',
+    'http://iridescent-truffle-570beb.netlify.app'
+  ],
+  credentials: true, // Allow sending cookies and authentication headers
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE'] // Allow specified HTTP methods
+};
+
+app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
+
 
 app.use((req, res, next) => {
   // Website you wish to allow to connect
@@ -35,7 +49,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
