@@ -26,35 +26,24 @@ class StudentController {
   *     description: 
   */
   public setStudents = expressAsyncHandler(async (req, res) => {
-    res.status(200).json({ message: "set users" });
-  });
+    const {
+      enroll_no,
+      name,
+      grade_level,
+      section_name,
+      qr_code
+    } = req.body;
 
-  /**
-  * @swagger
-  * /students:
-  *   put:
-  *     tags: 
-  *       - Student
-  *     summary: 
-  *     description: 
-  */
-  public updateStudents = expressAsyncHandler(async (req, res) => {
-    console.log(req.body);
-
-    res.status(200).json({ message: `update users ${req.params.id}` });
-  });
-
-  /**
-  * @swagger
-  * /students:
-  *   delete:
-  *     tags: 
-  *       - Student
-  *     summary: 
-  *     description:
-  */
-  public deleteStudents = expressAsyncHandler(async (req, res) => {
-    res.status(200).json({ message: `delete users ${req.params.id}` });
+    const student = Student.build({       
+      enroll_no,
+      name,
+      grade_level,
+      section_name,
+      qr_code
+     });
+     
+    await student.save();
+    res.status(201).send(student);
   });
 }
 

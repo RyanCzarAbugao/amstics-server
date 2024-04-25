@@ -13,7 +13,6 @@ class AttendanceController {
   *     description: 
   */
   public getAttendances = expressAsyncHandler(async (req: Request, res: Response) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://iridescent-truffle-570beb.netlify.app');
     const attendance = await Attendance.find();
     res.status(200).json(attendance);
   });
@@ -28,7 +27,6 @@ class AttendanceController {
   *     description: 
   */
   public setAttendances = expressAsyncHandler(async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://iridescent-truffle-570beb.netlify.app');
     const { enroll_no, class_date, status } = req.body;
     const attendance = Attendance.build({enroll_no, class_date, status});
     await attendance.save();
